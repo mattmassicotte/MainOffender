@@ -6,10 +6,20 @@
 # MainOffender
 A tiny package with utilities to help with Swift Concurrency
 
+You can also just copy-paste the stuff you need into your project if you aren't into taking on the dependnecy. I won't be offended (ha!).
+
 Features:
 - `MainActor.runUnsafely` for `MainActor.assumeIsolated` with lower OS version requirements.
 - `UnsafeBlockOperation` for `BlockOperation` without `Sendable` checking
 - Additions to `OperationQueue` to submit blocks directly without `Sendable` checking
+
+## Installation
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/ChimeHQ/MainOffender", branch: "main")
+]
+```
 
 ## Contributing and Collaboration
 
