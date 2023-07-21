@@ -6,6 +6,10 @@
 # MainOffender
 A tiny package with utilities to help with Swift Concurrency
 
+Features:
+- `MainActor.runUnsafely` for `MainActor.assumeIsolated` with lower OS version requirements.
+- `UnsafeBlockOperation` for `BlockOperation` without Sendable checking
+
 ## Contributing and Collaboration
 
 I prefer collaboration, and would love to find ways to work together if you have a similar project.
