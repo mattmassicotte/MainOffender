@@ -17,7 +17,7 @@ Features:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/ChimeHQ/MainOffender", branch: "main")
+    .package(url: "https://github.com/ChimeHQ/MainOffender", from: "0.1.0")
 ]
 ```
 
