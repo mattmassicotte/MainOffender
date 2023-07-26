@@ -12,6 +12,7 @@ Features:
 - `MainActor.runUnsafely` for `MainActor.assumeIsolated` with lower OS version requirements.
 - `UnsafeBlockOperation` for `BlockOperation` without `Sendable` checking
 - Additions to `OperationQueue` to submit blocks directly without `Sendable` checking
+- `addUnsafeObserver(forName:object:queue:using:)` for `NotificationCenter`
 
 ## Installation
 
