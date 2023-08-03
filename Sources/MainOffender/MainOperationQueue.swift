@@ -1,5 +1,8 @@
 import Foundation
 
+/// An `OperationQueue` proxy that accepts `@MainActor`-compatible closures.
+///
+/// All operations are actually run on `OperationQueue.main`.
 public final class MainOperationQueue {
 	public func addOperation(_ block: @MainActor @escaping @Sendable () -> Void) {
 		OperationQueue.main.addOperation {
