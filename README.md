@@ -6,10 +6,12 @@
 # MainOffender
 A tiny package with utilities to help with Swift Concurrency
 
-You can also just copy-paste the stuff you need into your project if you aren't into taking on the dependnecy. I won't be offended (ha!).
+You can also just copy-paste the stuff you need into your project if you aren't into taking on the dependency. I won't be offended (ha!).
 
 Features:
 - `MainActor.runUnsafely` for `MainActor.assumeIsolated` with lower OS version requirements.
+- `DispatchQueue.mainActor` for a `DispatchQueue` proxy that is `@MainActor`-compatible
+- `OperationQueue.mainActor` for an `OperationQueue` proxy that is `@MainActor` compatible
 - `UnsafeBlockOperation` for `BlockOperation` without `Sendable` checking
 - Additions to `OperationQueue` to submit blocks directly without `Sendable` checking
 - `addUnsafeObserver(forName:object:queue:using:)` for `NotificationCenter`
