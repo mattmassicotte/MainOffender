@@ -1,6 +1,6 @@
 import Foundation
 
-public final class MainDispatchQueue {
+public final class MainDispatchQueue: Sendable {
 	public func async(
 		group: DispatchGroup? = nil,
 		qos: DispatchQoS = .unspecified,
