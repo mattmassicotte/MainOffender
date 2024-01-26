@@ -1,9 +1,9 @@
-// swift-tools-version: 5.5
+// swift-tools-version: 5.8
 
 import PackageDescription
 
 let settings: [SwiftSetting] = [
-	 // .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"])
+	.enableExperimentalFeature("StrictConcurrency")
 ]
 
 let package = Package(
