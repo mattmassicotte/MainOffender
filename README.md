@@ -1,6 +1,10 @@
+<div align="center">
+
 [![Build Status][build status badge]][build status]
 [![Platforms][platforms badge]][platforms]
 [![Documentation][documentation badge]][documentation]
+
+</div>
 
 # MainOffender
 A tiny package with utilities to help with Swift Concurrency
@@ -14,6 +18,26 @@ Features:
 - `UnsafeBlockOperation` for `BlockOperation` without `Sendable` checking
 - Additions to `OperationQueue` to submit blocks directly without `Sendable` checking
 - `addUnsafeObserver(forName:object:queue:using:)` for `NotificationCenter`
+
+## Usage
+
+`OperationQueue` did not (yet?) get the same unsafe features of 
+
+```swift
+let op = UnsafeBlockOperation {
+    // non-Sendable captures ok
+}
+
+operationQueue.addOperation(op)
+
+queue.addUnsafeOperation {
+    // non-Sendable captures ok
+}
+
+queue.addUnsafeBarrierBlock {
+    // non-Sendable captures ok
+}
+```
 
 ## Installation
 
@@ -35,8 +59,6 @@ By participating in this project you agree to abide by the [Contributor Code of 
 
 [build status]: https://github.com/mattmassicotte/MainOffender/actions
 [build status badge]: https://github.com/mattmassicotte/MainOffender/workflows/CI/badge.svg
-[license]: https://opensource.org/licenses/BSD-3-Clause
-[license badge]: https://img.shields.io/github/license/mattmassicotte/MainOffender
 [platforms]: https://swiftpackageindex.com/mattmassicotte/MainOffender
 [platforms badge]: https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fmattmassicotte%2FMainOffender%2Fbadge%3Ftype%3Dplatforms
 [documentation]: https://swiftpackageindex.com/mattmassicotte/MainOffender/main/documentation

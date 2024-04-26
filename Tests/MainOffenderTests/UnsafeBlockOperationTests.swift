@@ -6,18 +6,52 @@ final class UnsendableClass {
 }
 
 final class UnsafeBlockOperationTests: XCTestCase {
-	func testUnsafeBlock() throws {
+	func testUnsafeBlockOperation() async throws {
 		let unsendable = UnsendableClass()
+		let exp = expectation(description: "completed")
 
 		let op = UnsafeBlockOperation {
 			unsendable.value = 0
+			exp.fulfill()
 		}
 
 		let queue = OperationQueue()
 
 		queue.addOperation(op)
 
-		queue.waitUntilAllOperationsAreFinished()
+		await fulfillment(of: [exp], timeout: 1.0)
+
+		XCTAssertEqual(unsendable.value, 0)
+	}
+
+	func testUnsafeBlock() async throws {
+		let unsendable = UnsendableClass()
+
+		let queue = OperationQueue()
+		let exp = expectation(description: "completed")
+
+		queue.addUnsafeOperation {
+			unsendable.value = 0
+			exp.fulfill()
+		}
+
+		await fulfillment(of: [exp], timeout: 1.0)
+
+		XCTAssertEqual(unsendable.value, 0)
+	}
+
+	func testUnsafeBarrierBlock() async throws {
+		let unsendable = UnsendableClass()
+
+		let queue = OperationQueue()
+		let exp = expectation(description: "completed")
+
+		queue.addBarrierBlock {
+			unsendable.value = 0
+			exp.fulfill()
+		}
+
+		await fulfillment(of: [exp], timeout: 1.0)
 
 		XCTAssertEqual(unsendable.value, 0)
 	}
