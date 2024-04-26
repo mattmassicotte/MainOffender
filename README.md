@@ -21,7 +21,7 @@ Features:
 
 ## Usage
 
-`OperationQueue` did not (yet?) get the same unsafe features of 
+`OperationQueue` did not (yet?) get the same unsafe features of `DispatchQueue`. Here are some unsafe variants that allow you to make use of `OperationQueue` without warnings.
 
 ```swift
 let op = UnsafeBlockOperation {
