@@ -8,7 +8,7 @@ public final class MainDispatchQueue: Sendable {
 		execute work: @MainActor @escaping @Sendable @convention(block) () -> Void
 	) {
 		DispatchQueue.main.async(group: group, qos: qos, flags: flags) {
-			MainActor.runUnsafely(work)
+			MainActor.assumeIsolated(work)
 		}
 	}
 
@@ -21,7 +21,7 @@ public final class MainDispatchQueue: Sendable {
 		let work = unsafeBitCast(unsafeWork, to: (@Sendable @convention(block) () -> Void).self)
 
 		DispatchQueue.main.async(group: group, qos: qos, flags: flags) {
-			MainActor.runUnsafely(work)
+			MainActor.assumeIsolated(work)
 		}
 	}
 
@@ -32,7 +32,7 @@ public final class MainDispatchQueue: Sendable {
 		execute work: @MainActor @escaping @Sendable @convention(block) () -> Void
 	) {
 		DispatchQueue.main.asyncAfter(deadline: deadline, qos: qos, flags: flags) {
-			MainActor.runUnsafely(work)
+			MainActor.assumeIsolated(work)
 		}
 	}
 
@@ -45,7 +45,7 @@ public final class MainDispatchQueue: Sendable {
 		let work = unsafeBitCast(unsafeWork, to: (@Sendable @convention(block) () -> Void).self)
 
 		DispatchQueue.main.asyncAfter(deadline: deadline, qos: qos, flags: flags) {
-			MainActor.runUnsafely(work)
+			MainActor.assumeIsolated(work)
 		}
 	}
 }
@@ -62,7 +62,7 @@ extension DispatchGroup {
 		execute work: @MainActor @escaping @Sendable @convention(block) () -> Void
 	) {
 		self.notify(qos: qos, flags: flags, queue: .main) {
-			MainActor.runUnsafely(work)
+			MainActor.assumeIsolated(work)
 		}
 	}
 }

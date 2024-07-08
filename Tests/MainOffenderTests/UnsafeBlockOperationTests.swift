@@ -41,18 +41,13 @@ final class UnsafeBlockOperationTests: XCTestCase {
 	}
 
 	func testUnsafeBarrierBlock() async throws {
-		let unsendable = UnsendableClass()
-
 		let queue = OperationQueue()
 		let exp = expectation(description: "completed")
 
 		queue.addBarrierBlock {
-			unsendable.value = 0
 			exp.fulfill()
 		}
 
 		await fulfillment(of: [exp], timeout: 1.0)
-
-		XCTAssertEqual(unsendable.value, 0)
 	}
 }

@@ -6,25 +6,25 @@ import Foundation
 public final class MainOperationQueue: Sendable {
 	public func addOperation(_ block: @MainActor @escaping @Sendable () -> Void) {
 		OperationQueue.main.addOperation {
-			MainActor.runUnsafely(block)
+			MainActor.assumeIsolated(block)
 		}
 	}
 
 	public func addUnsafeOperation(_ unsafeBlock: @escaping () -> Void) {
 		OperationQueue.main.addUnsafeOperation {
-			MainActor.runUnsafely(unsafeBlock)
+			MainActor.assumeIsolated(unsafeBlock)
 		}
 	}
 
 	public func addBarrierBlock(_ barrier: @MainActor @escaping @Sendable () -> Void) {
 		OperationQueue.main.addBarrierBlock {
-			MainActor.runUnsafely(barrier)
+			MainActor.assumeIsolated(barrier)
 		}
 	}
 
 	public func addUnsafeBarrierBlock(_ unsafeBlock: @escaping () -> Void) {
 		OperationQueue.main.addUnsafeBarrierBlock {
-			MainActor.runUnsafely(unsafeBlock)
+			MainActor.assumeIsolated(unsafeBlock)
 		}
 	}
 	

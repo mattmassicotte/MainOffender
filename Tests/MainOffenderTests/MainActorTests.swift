@@ -1,6 +1,7 @@
 import XCTest
 import MainOffender
 
+@available(*, deprecated, message: "Here just to validate the legacy API")
 final class MainActorTests: XCTestCase {
 	@MainActor
 	func testRunOnMainUnsafely() throws {

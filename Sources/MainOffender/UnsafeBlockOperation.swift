@@ -1,7 +1,7 @@
 import Foundation
 
 /// An operation that manages the concurrent execution of one or more blocks without Sendable checking.
-public class UnsafeBlockOperation: BlockOperation {
+public class UnsafeBlockOperation: BlockOperation, @unchecked Sendable {
 	public init(block unsafeBlock: @escaping () -> Void) {
 		super.init()
 		addUnsafeExecutionBlock(block: unsafeBlock)
