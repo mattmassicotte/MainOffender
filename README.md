@@ -21,9 +21,35 @@ Features:
 
 ## Usage
 
-`OperationQueue` did not (yet?) get the same unsafe features of `DispatchQueue`. Here are some unsafe variants that allow you to make use of `OperationQueue` without warnings.
+Dispatch:
 
 ```swift
+// MainActor proxy
+let mainQueue = DispatchQueue.mainActor
+
+mainQueue.async {
+    // statically MainActor
+}
+
+let group = DispatchGroup()
+
+// an overload to integrate with DispatchGroup
+group.notify(queue: mainQueue) {
+    // statically MainActor
+}
+```
+
+OperationQueue:
+
+```swift
+// MainActor proxy
+let mainQueue = OperationQueue.mainActor
+
+mainQueue.addOperation {
+    // statically MainActor
+}
+
+// Unsafe variants
 let op = UnsafeBlockOperation {
     // non-Sendable captures ok
 }
@@ -39,6 +65,19 @@ queue.addUnsafeBarrierBlock {
 }
 ```
 
+NotificationCenter:
+
+```swift
+NotificationCenter.default.addUnsafeObserver(forName: noteName, object: nil, queue: nil) {
+    // no Sendable requirements here
+}
+
+// this will assert if notification is delievered off the MainActor at runtime
+NotificationCenter.default.addMainActorObserver(forName: noteName, object: nil) { notification in
+    // statically MainActor will full access to Notification object
+}
+```
+
 You can use `ThreadExecutor` to implement an actor that runs all of its methods on a dedicated thread with a functional runloop. This is conceptually similar to how the `MainActor` works.
 
 Useful if you want to interate with RunLoop-based APIs. You can also use this to reduce the deadlock risk of synchronously blocking actor execution. Just be aware that both creating and switching to `ThreadExecutor` actors can be much more expensive than traditional actors.
@@ -48,7 +87,7 @@ actor ThreadActor {
     private let executor = ThreadExecutor(name: "my thread")
 
     nonisolated var unownedExecutor: UnownedSerialExecutor {
-    	executor.asUnownedSerialExecutor()
+        executor.asUnownedSerialExecutor()
     }
 
     func runsOnThread() {
