@@ -17,6 +17,7 @@ Features:
 - `UnsafeBlockOperation` for `BlockOperation` without `Sendable` checking
 - Additions to `OperationQueue` to submit blocks directly without `Sendable` checking
 - `addUnsafeObserver(forName:object:queue:using:)` for `NotificationCenter`
+- `ThreadExecutor` that can be used to back an actor with a dedicated thread + runloop
 
 ## Usage
 
@@ -35,6 +36,24 @@ queue.addUnsafeOperation {
 
 queue.addUnsafeBarrierBlock {
     // non-Sendable captures ok
+}
+```
+
+You can use `ThreadExecutor` to implement an actor that runs all of its methods on a dedicated thread with a functional runloop. This is conceptually similar to how the `MainActor` works.
+
+Useful if you want to interate with RunLoop-based APIs. You can also use this to reduce the deadlock risk of synchronously blocking actor execution. Just be aware that both creating and switching to `ThreadExecutor` actors can be much more expensive than traditional actors.
+
+```swift
+actor ThreadActor {
+    private let executor = ThreadExecutor(name: "my thread")
+
+    nonisolated var unownedExecutor: UnownedSerialExecutor {
+    	executor.asUnownedSerialExecutor()
+    }
+
+    func runsOnThread() {
+        // This will always execute on the same thread
+    }
 }
 ```
 
