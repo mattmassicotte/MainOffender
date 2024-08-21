@@ -18,6 +18,7 @@ Features:
 - Additions to `OperationQueue` to submit blocks directly without `Sendable` checking
 - `addUnsafeObserver(forName:object:queue:using:)` for `NotificationCenter`
 - `ThreadExecutor` that can be used to back an actor with a dedicated thread + runloop
+- `RunLoop.turn` to better control the runloop in an async context
 
 ## Usage
 
@@ -76,6 +77,13 @@ NotificationCenter.default.addUnsafeObserver(forName: noteName, object: nil, que
 NotificationCenter.default.addMainActorObserver(forName: noteName, object: nil) { notification in
     // statically MainActor will full access to Notification object
 }
+```
+
+`RunLoop` additions:
+
+```swift
+// Guarantee that the current RunLoop turns at least once
+await RunLoop.turn()
 ```
 
 You can use `ThreadExecutor` to implement an actor that runs all of its methods on a dedicated thread with a functional runloop. This is conceptually similar to how the `MainActor` works.
