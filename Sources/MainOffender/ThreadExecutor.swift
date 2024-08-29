@@ -52,13 +52,10 @@ final class ThreadRunLoop: Sendable {
 			equal: nil,
 			hash: nil,
 			schedule: { _, _, _ in
-				print("schedule")
 			},
 			cancel: { _, _, _ in
-				print("cancel")
 			},
 			perform: { _ in
-				print("peform")
 			}
 		)
 
