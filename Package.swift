@@ -2,10 +2,6 @@
 
 import PackageDescription
 
-let settings: [SwiftSetting] = [
-	.enableExperimentalFeature("StrictConcurrency")
-]
-
 let package = Package(
 	name: "MainOffender",
 	platforms: [
@@ -29,6 +25,7 @@ let package = Package(
 
 let swiftSettings: [SwiftSetting] = [
 	.enableExperimentalFeature("StrictConcurrency"),
+	.enableUpcomingFeature("GlobalActorIsolatedTypesUsability"),
 ]
 
 for target in package.targets {

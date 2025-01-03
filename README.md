@@ -75,7 +75,15 @@ NotificationCenter.default.addUnsafeObserver(forName: noteName, object: nil, que
 
 // this will assert if notification is delievered off the MainActor at runtime
 NotificationCenter.default.addMainActorObserver(forName: noteName, object: nil) { notification in
-    // statically MainActor will full access to Notification object
+    // statically MainActor with full access to Notification object
+}
+```
+
+UndoManager:
+
+```
+undoManager.registerMainActorUndo(withTarget: someView) { target in
+    // statically MainActor here
 }
 ```
 
