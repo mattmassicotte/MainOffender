@@ -2,6 +2,7 @@
 import AppKit
 
 extension UndoManager {
+	@MainActor
 	public func registerMainActorUndo<TargetType>(
 		withTarget target: TargetType,
 		handler: @escaping @MainActor (TargetType) -> Void
