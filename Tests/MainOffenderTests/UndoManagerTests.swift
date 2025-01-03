@@ -1,6 +1,8 @@
 import XCTest
 import MainOffender
 
+#if os(macOS) || canImport(UIKit)
+
 @MainActor
 fileprivate func mainActorFunction() {
 
@@ -19,3 +21,4 @@ final class UndoManagerTests: XCTestCase {
 		manager.undo()
 	}
 }
+#endif

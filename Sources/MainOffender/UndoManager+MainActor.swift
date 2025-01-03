@@ -1,6 +1,10 @@
 #if os(macOS)
 import AppKit
+#elseif canImport(UIKit)
+import UIKit
+#endif
 
+#if os(macOS) || canImport(UIKit)
 extension UndoManager {
 	@MainActor
 	public func registerMainActorUndo<TargetType>(
