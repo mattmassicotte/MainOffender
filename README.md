@@ -14,9 +14,7 @@ You can also just copy-paste the stuff you need into your project if you aren't 
 Features:
 - `DispatchQueue.mainActor` for a `DispatchQueue` proxy that is `@MainActor`-compatible
 - `OperationQueue.mainActor` for an `OperationQueue` proxy that is `@MainActor`-compatible
-- `UnsafeBlockOperation` for `BlockOperation` without `Sendable` checking
-- Additions to `OperationQueue` to submit blocks directly without `Sendable` checking
-- `addUnsafeObserver(forName:object:queue:using:)` for `NotificationCenter`
+- `addMainActorObserver(forName:object:queue:using:)` for `NotificationCenter`
 - `ThreadExecutor` that can be used to back an actor with a dedicated thread + runloop
 - `RunLoop.turn` to better control the runloop in an async context
 
@@ -49,30 +47,11 @@ let mainQueue = OperationQueue.mainActor
 mainQueue.addOperation {
     // statically MainActor
 }
-
-// Unsafe variants
-let op = UnsafeBlockOperation {
-    // non-Sendable captures ok
-}
-
-operationQueue.addOperation(op)
-
-queue.addUnsafeOperation {
-    // non-Sendable captures ok
-}
-
-queue.addUnsafeBarrierBlock {
-    // non-Sendable captures ok
-}
 ```
 
 NotificationCenter:
 
 ```swift
-NotificationCenter.default.addUnsafeObserver(forName: noteName, object: nil, queue: nil) {
-    // no Sendable requirements here
-}
-
 // this will assert if notification is delievered off the MainActor at runtime
 NotificationCenter.default.addMainActorObserver(forName: noteName, object: nil) { notification in
     // statically MainActor with full access to Notification object

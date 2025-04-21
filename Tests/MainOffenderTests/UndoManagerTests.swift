@@ -7,6 +7,9 @@ import MainOffender
 fileprivate func mainActorFunction() {
 
 }
+final class UnsendableClass {
+	var value = 5
+}
 
 final class UndoManagerTests: XCTestCase {
 	@MainActor

@@ -12,38 +12,12 @@ public final class MainDispatchQueue: Sendable {
 		}
 	}
 
-	public func asyncUnsafe(
-		group: DispatchGroup? = nil,
-		qos: DispatchQoS = .unspecified,
-		flags: DispatchWorkItemFlags = [],
-		execute unsafeWork: @MainActor @escaping @convention(block) () -> Void
-	) {
-		let work = unsafeBitCast(unsafeWork, to: (@Sendable @convention(block) () -> Void).self)
-
-		DispatchQueue.main.async(group: group, qos: qos, flags: flags) {
-			MainActor.assumeIsolated(work)
-		}
-	}
-
 	public func asyncAfter(
 		deadline: DispatchTime,
 		qos: DispatchQoS = .unspecified,
 		flags: DispatchWorkItemFlags = [],
 		execute work: @MainActor @escaping @Sendable @convention(block) () -> Void
 	) {
-		DispatchQueue.main.asyncAfter(deadline: deadline, qos: qos, flags: flags) {
-			MainActor.assumeIsolated(work)
-		}
-	}
-
-	public func asyncAfterUnsafe(
-		deadline: DispatchTime,
-		qos: DispatchQoS = .unspecified,
-		flags: DispatchWorkItemFlags = [],
-		execute unsafeWork: @MainActor @escaping @convention(block) () -> Void
-	) {
-		let work = unsafeBitCast(unsafeWork, to: (@Sendable @convention(block) () -> Void).self)
-
 		DispatchQueue.main.asyncAfter(deadline: deadline, qos: qos, flags: flags) {
 			MainActor.assumeIsolated(work)
 		}
