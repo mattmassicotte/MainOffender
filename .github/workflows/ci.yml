@@ -13,21 +13,26 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: Test
-    runs-on: macOS-14
+    runs-on: macOS-15
+    timeout-minutes: 30
     env:
-      DEVELOPER_DIR: /Applications/Xcode_15.3.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_16.3.app
     strategy:
       matrix:
         destination:
           - "platform=macOS"
           - "platform=macOS,variant=Mac Catalyst"
-          - "platform=iOS Simulator,name=iPhone 11"
+          - "platform=iOS Simulator,name=iPhone 16"
           - "platform=tvOS Simulator,name=Apple TV"
+          - "platform=watchOS Simulator,name=Apple Watch Series 10 (42mm)"
           - "platform=visionOS Simulator,name=Apple Vision Pro"
-
     steps:
       - uses: actions/checkout@v4
       - name: Test platform ${{ matrix.destination }}
