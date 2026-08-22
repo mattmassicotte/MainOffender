@@ -7,6 +7,10 @@
 </div>
 
 # MainOffender
+
+> Originally authored by [Matt Massicotte](https://www.massicotte.org/). Maintained by [Dmitrii Kharlamov](https://dakharlamov.com) as of August 2026. Please consider [sponsoring the original author of this work - Matt Massicotte](https://github.com/sponsors/mattmassicotte).
+
+
 A tiny package with utilities to help with Swift Concurrency
 
 You can also just copy-paste the stuff you need into your project if you aren't into taking on the dependency. I won't be offended (ha!).
@@ -97,13 +101,13 @@ actor ThreadActor {
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/mattmassicotte/MainOffender", from: "0.1.0")
+    .package(url: "https://github.com/dimasusername/MainOffender", from: "0.1.0")
 ]
 ```
 
 ## Contributing and Collaboration
 
-I would love to hear from you! Issues or pull requests work great. Both a [Matrix space][matrix] and [Discord][discord] are available for live help, but I have a strong bias towards answering in the form of documentation. You can also find me on [the web](https://www.massicotte.org).
+I would love to hear from you! Issues or pull requests work great. I have a strong bias towards answering in the form of documentation. You can find Matt [here](https://www.massicotte.org/about) and Dmitrii [here](https://dakharlamov.com). Original ChimeHQ [Matrix space][matrix] and [Discord][discord] remain online but please don't expect live help there as Matt is no longer a maintainer on this project.
 
 I prefer collaboration, and would love to find ways to work together if you have a similar project.
 
@@ -111,9 +115,9 @@ I prefer indentation with tabs for improved accessibility. But, I'd rather you u
 
 By participating in this project you agree to abide by the [Contributor Code of Conduct](CODE_OF_CONDUCT.md).
 
-[build status]: https://github.com/mattmassicotte/MainOffender/actions
-[build status badge]: https://github.com/mattmassicotte/MainOffender/workflows/CI/badge.svg
-[platforms]: https://swiftpackageindex.com/mattmassicotte/MainOffender
+[build status]: https://github.com/dimasusername/MainOffender/actions
+[build status badge]: https://github.com/dimasusername/MainOffender/workflows/CI/badge.svg
+[platforms]: https://swiftpackageindex.com/dimasusername/MainOffender
 [platforms badge]: https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fmattmassicotte%2FMainOffender%2Fbadge%3Ftype%3Dplatforms
 [documentation]: https://swiftpackageindex.com/mattmassicotte/MainOffender/main/documentation
 [documentation badge]: https://img.shields.io/badge/Documentation-DocC-blue
